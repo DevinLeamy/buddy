@@ -19,10 +19,16 @@ def encode_image(image_path):
 
 while True:
   cap = cv2.VideoCapture(0)
+  cap.set(cv2.CAP_PROP_FRAME_WIDTH, 224)
+  cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 224)
+  cap.set(cv2.CAP_PROP_FPS, 10)
+
+
   if cap.isOpened():
     ret, frame = cap.read()
     if ret:
       print("Frame captured")
+      cv2.imshow("real time", frame)
       os.remove("./out/image.jpg")
       cv2.imwrite("./out/image.jpg", frame)
       image_path = "./out/image.jpg"
@@ -61,9 +67,11 @@ while True:
 
       sense = SenseHat()
       sense.set_pixels(display)
+      if cv2.waitKey(1) & 0xFF == ord('q'):
+        break
 
     else:
       print("Failed to capture frame")
   cap.release()
-  time.sleep(10)
+  time.sleep(2)
 
