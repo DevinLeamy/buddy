@@ -1,4 +1,4 @@
-# Buddy
+# Buddy (CENG 4480 final project)
 
 ### Requirements
 
